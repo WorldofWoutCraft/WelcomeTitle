@@ -11,14 +11,20 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin implements Listener {
 
+    private static Main instance;
+
+    public static Main getInstance() {
+        return instance;
+    }
+
     @Override
     public void onEnable(){
+        instance = this;
         this.getServer().getPluginManager().registerEvents(this, this);
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event){
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new WelcomeTask(event.getPlayer()), 60L);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new WelcomeTask(event.getPlayer()), 30L);
     }
-
 }
