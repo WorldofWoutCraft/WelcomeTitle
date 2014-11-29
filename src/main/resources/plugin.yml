@@ -1,0 +1,6 @@
+ name: WelcomeTitle
+ version: 1.0.0
+ description: WelcomeTitle
+ author: woutwoot
+ main: com.woutwoot.welcometitle.Main
+ database: false
