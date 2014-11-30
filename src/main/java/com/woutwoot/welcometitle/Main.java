@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,7 +59,10 @@ public class Main extends JavaPlugin implements Listener {
         } catch (IOException e) {
             return;
         }
-        users = config.getStringList("users");
+        users = new ArrayList<>();
+        if (config.getStringList("users") != null) {
+            users.addAll(config.getStringList("users"));
+        }
     }
 
     private void saveTheConfig() {
