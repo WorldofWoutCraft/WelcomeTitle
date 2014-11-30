@@ -1,10 +1,15 @@
 package com.woutwoot.welcometitle;
 
+import com.woutwoot.welcometitle.tools.WootConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Wout on 29/11/2014.
@@ -12,6 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin implements Listener {
 
     private static Main instance;
+    private static List<String> users;
 
     public static Main getInstance() {
         return instance;
@@ -20,14 +26,50 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable(){
         instance = this;
+        loadTheConfig();
         this.getServer().getPluginManager().registerEvents(this, this);
     }
 
+    @Override
+    public void onDisable() {
+        saveTheConfig();
+    }
+
+
     @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event){
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new WelcomeTask(event.getPlayer()), 20L);
+        if (users.contains(event.getPlayer().getUniqueId().toString())) {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new WelcomeTask(event.getPlayer(), true), 20L);
+        } else {
+            users.add(event.getPlayer().getUniqueId().toString());
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new WelcomeTask(event.getPlayer(), false), 20L);
+        }
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new RulesTask(event.getPlayer()), 100L);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Rules2Task(event.getPlayer()), 180L);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Rules3Task(event.getPlayer()), 260L);
+    }
+
+    private void loadTheConfig() {
+        File f = new File(this.getDataFolder() + File.separator + "users.properties");
+        f.mkdir();
+        WootConfig config = new WootConfig(f);
+        try {
+            config.loadFile();
+        } catch (IOException e) {
+            return;
+        }
+        users = config.getStringList("users");
+    }
+
+    private void saveTheConfig() {
+        File f = new File(this.getDataFolder() + File.separator + "users.properties");
+        f.mkdir();
+        WootConfig config = new WootConfig(f);
+        config.setStringList("users", users);
+        try {
+            config.saveFile("Do not edit.");
+        } catch (IOException e) {
+            return;
+        }
     }
 }

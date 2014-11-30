@@ -9,15 +9,20 @@ import org.bukkit.entity.Player;
 public class WelcomeTask implements Runnable {
 
     private final Player p;
+    private boolean b;
 
-    public WelcomeTask(Player p) {
+    public WelcomeTask(Player p, boolean b) {
         this.p = p;
+        this.b = b;
     }
 
     @Override
     public void run() {
         Server server = Main.getInstance().getServer();
-        Title.showTitleToEveryone("Welcome " + p.getName(), "To the World of WoutCraft!");
-
+        if (b) {
+            Title.showTitleToEveryone("Welcome back " + p.getName(), "We've missed you!");
+        } else {
+            Title.showTitleToEveryone("Welcome " + p.getName(), "Enjoy the World of WoutCraft!");
+        }
     }
 }
