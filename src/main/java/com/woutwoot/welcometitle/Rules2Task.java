@@ -18,7 +18,7 @@ public class Rules2Task implements Runnable {
     @Override
     public void run() {
         Server server = Main.getInstance().getServer();
-        Title.showTitleToEveryone("Rule 2", "No swearing or talking in full caps!");
+        Title.showTitle(p, "Rule 2", "No swearing or talking in full caps!");
 
     }
 }

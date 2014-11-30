@@ -18,7 +18,7 @@ public class RulesTask implements Runnable {
     @Override
     public void run() {
         Server server = Main.getInstance().getServer();
-        Title.showTitleToEveryone("Rule 1", "No Griefing!");
+        Title.showTitle(p, "Rule 1", "No Griefing!");
 
     }
 }
