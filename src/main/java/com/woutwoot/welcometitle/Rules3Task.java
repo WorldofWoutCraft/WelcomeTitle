@@ -18,7 +18,7 @@ public class Rules3Task implements Runnable {
     @Override
     public void run() {
         Server server = Main.getInstance().getServer();
-        Title.showTitleToEveryone("Rule 2", "Don't ask for OP and don't ask for spawning items!");
+        Title.showTitleToEveryone("Rule 3", "Don't ask for OP and don't ask for spawning items!");
 
     }
 }
