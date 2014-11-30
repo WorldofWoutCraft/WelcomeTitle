@@ -25,6 +25,9 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event){
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new WelcomeTask(event.getPlayer()), 30L);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new WelcomeTask(event.getPlayer()), 20L);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new RulesTask(event.getPlayer()), 100L);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Rules2Task(event.getPlayer()), 180L);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Rules3Task(event.getPlayer()), 260L);
     }
 }
