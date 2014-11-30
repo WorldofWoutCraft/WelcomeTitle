@@ -18,7 +18,7 @@ import java.util.List;
 public class Main extends JavaPlugin implements Listener {
 
     private static Main instance;
-    private static List<String> users;
+    private static List<String> users = new ArrayList<>();
 
     public static Main getInstance() {
         return instance;
@@ -44,15 +44,15 @@ public class Main extends JavaPlugin implements Listener {
         } else {
             users.add(event.getPlayer().getUniqueId().toString());
             Bukkit.getScheduler().scheduleSyncDelayedTask(this, new WelcomeTask(event.getPlayer(), false), 20L);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new RulesTask(event.getPlayer()), 100L);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Rules2Task(event.getPlayer()), 180L);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Rules3Task(event.getPlayer()), 260L);
         }
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new RulesTask(event.getPlayer()), 100L);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Rules2Task(event.getPlayer()), 180L);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Rules3Task(event.getPlayer()), 260L);
     }
 
     private void loadTheConfig() {
+        this.getDataFolder().mkdir();
         File f = new File(this.getDataFolder() + File.separator + "users.properties");
-        f.mkdir();
         WootConfig config = new WootConfig(f);
         try {
             config.loadFile();
@@ -67,7 +67,6 @@ public class Main extends JavaPlugin implements Listener {
 
     private void saveTheConfig() {
         File f = new File(this.getDataFolder() + File.separator + "users.properties");
-        f.mkdir();
         WootConfig config = new WootConfig(f);
         config.setStringList("users", users);
         try {
