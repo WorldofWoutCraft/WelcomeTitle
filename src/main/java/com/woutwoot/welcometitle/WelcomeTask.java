@@ -1,5 +1,6 @@
 package com.woutwoot.welcometitle;
 
+import com.woutwoot.welcometitle.tools.Title;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 /**
@@ -16,7 +17,6 @@ public class WelcomeTask implements Runnable {
     @Override
     public void run() {
         Server server = Main.getInstance().getServer();
-        server.dispatchCommand(server.getConsoleSender(), "title " + p.getName() + " title {text:\"Welcome " + p.getName() + "!\", color:\"red\"}");
-        server.dispatchCommand(server.getConsoleSender(), "title " + p.getName() + " subtitle {text:\"To the World of WoutCraft!\", color:\"yellow\"}");
+        Title.showTitleToEveryone("Welcome " + p.getName(), "To the World of WoutCraft!");
     }
 }
