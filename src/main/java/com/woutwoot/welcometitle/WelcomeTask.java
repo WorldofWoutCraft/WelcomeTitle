@@ -18,9 +18,7 @@ public class WelcomeTask implements Runnable {
     @Override
     public void run() {
         if (b) {
-            if (p.getName().equals("darkova123")) {
-                Title.showTitleToEveryone("Jow piemel", "Please die.");
-            } else {
+            if (!p.getName().equals("darkova123")) {
                 Title.showTitleToEveryone("Welcome back " + p.getName(), "We've missed you!");
             }
         } else {
