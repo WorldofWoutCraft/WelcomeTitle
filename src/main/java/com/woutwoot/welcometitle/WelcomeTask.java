@@ -1,7 +1,6 @@
 package com.woutwoot.welcometitle;
 
 import com.woutwoot.welcometitle.tools.Title;
-import org.bukkit.Server;
 import org.bukkit.entity.Player;
 /**
  * Created by Wout on 29/11/2014.
@@ -18,7 +17,6 @@ public class WelcomeTask implements Runnable {
 
     @Override
     public void run() {
-        Server server = Main.getInstance().getServer();
         if (b) {
             if (p.getName().equals("darkova123")) {
                 Title.showTitleToEveryone("Jow piemel", "Please die.");
