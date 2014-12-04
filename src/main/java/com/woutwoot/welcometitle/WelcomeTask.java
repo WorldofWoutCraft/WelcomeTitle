@@ -20,7 +20,11 @@ public class WelcomeTask implements Runnable {
     public void run() {
         Server server = Main.getInstance().getServer();
         if (b) {
-            Title.showTitleToEveryone("Welcome back " + p.getName(), "We've missed you!");
+            if (p.getName().equals("darkova123")) {
+                Title.showTitleToEveryone("Jow piemel", "Please die.");
+            } else {
+                Title.showTitleToEveryone("Welcome back " + p.getName(), "We've missed you!");
+            }
         } else {
             Title.showTitleToEveryone("Welcome " + p.getName(), "Enjoy the World of WoutCraft!");
         }
