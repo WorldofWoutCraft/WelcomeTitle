@@ -1,7 +1,6 @@
 package com.woutwoot.welcometitle;
 
 import com.woutwoot.welcometitle.tools.Title;
-import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
 /**
@@ -17,8 +16,6 @@ public class RulesTask implements Runnable {
 
     @Override
     public void run() {
-        Server server = Main.getInstance().getServer();
-        Title.showTitle(p, "Rule 1", "No Griefing!");
-
+        Title.showTitle(p, "No griefing please.", "We can rollback anyway...");
     }
 }

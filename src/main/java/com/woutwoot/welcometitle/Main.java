@@ -39,14 +39,13 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event){
+        if (event.getPlayer().hasPlayedBefore())
         if (users.contains(event.getPlayer().getUniqueId().toString())) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(this, new WelcomeTask(event.getPlayer(), true), 20L);
         } else {
             users.add(event.getPlayer().getUniqueId().toString());
             Bukkit.getScheduler().scheduleSyncDelayedTask(this, new WelcomeTask(event.getPlayer(), false), 20L);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new RulesTask(event.getPlayer()), 100L);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Rules2Task(event.getPlayer()), 180L);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Rules3Task(event.getPlayer()), 260L);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new RulesTask(event.getPlayer()), 200L);
         }
     }
 
